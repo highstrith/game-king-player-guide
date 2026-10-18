@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="游戏王玩家页面：全部角色技能、小游戏规则、计分和胜负说明。"><meta name="color-scheme" content="light">
+<title>游戏王 · 玩家页面</title><style>:root{--ink:#1b304d;--muted:#596d85;--blue:#2458bd;--paper:#fff;--mist:#f0f5fc;--line:#d4dfed;--orange:#f0b34b;--soft:#e5edfa}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--mist);color:var(--ink);font:16px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}a{color:inherit;text-underline-offset:4px}button,input{font:inherit}button,a,input,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:4px}button{min-height:44px}[hidden]{display:none!important}.skip{position:absolute;top:-100px;padding:12px;background:var(--paper);z-index:10}.skip:focus{top:10px}
+.masthead{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:22px 28px;border-bottom:1px solid var(--line);gap:12px}.brand{font-weight:850;font-size:21px;letter-spacing:1px}.brand span{font-weight:400;font-size:12px;color:var(--muted);margin-left:12px;letter-spacing:0}.masthead>a{font-size:12px;color:var(--muted);text-decoration:none}main{max-width:1044px;margin:auto;padding:0 28px}.intro{position:relative;padding:44px 0 30px;display:grid;grid-template-columns:1.5fr 1fr;column-gap:32px}.eyebrow{font-size:12px;letter-spacing:2px;color:var(--blue);font-weight:700;margin:0 0 12px}h1{font-family:"STKaiti","KaiTi","Kaiti SC","PingFang SC",serif;font-size:clamp(38px,6vw,64px);line-height:1.22;letter-spacing:-1px;margin:0;grid-row:2/4}.intro-copy{font-size:16px;color:var(--muted);margin:0;padding:12px 0;align-self:end}.intro-note{grid-column:2;display:flex;gap:10px;align-items:flex-start;max-width:310px;font-size:13px;color:var(--muted)}.intro-note p{margin:0}.note-dot{width:8px;height:8px;flex-shrink:0;border-radius:50%;background:var(--orange);margin-top:8px}
+.section-nav{display:flex;gap:6px;position:sticky;top:0;background:var(--mist);z-index:2;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}.section-nav a{border:1px solid transparent;text-decoration:none;border-radius:8px;padding:8px 17px;font-size:14px;font-weight:650}.section-nav a:first-child{background:var(--ink);color:white}.section-nav a:hover{border-color:var(--line)}.search-bar{padding:24px 0 0}.search-bar label{display:block;font-size:13px;font-weight:650;margin-bottom:7px}.search-field{display:flex;gap:8px}.search-field input{width:100%;min-width:0;border:1px solid var(--line);border-radius:8px;background:white;padding:11px 14px;min-height:48px;font-size:16px}.search-field button,.expand-button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:8px 14px;font-size:13px;white-space:nowrap}.search-bar>p{font-size:12px;color:var(--muted);margin:8px 0 0}.content-section{padding:36px 0 12px;scroll-margin-top:25px}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.section-heading .eyebrow{margin-bottom:4px}h2{font-size:26px;line-height:1.35;margin:0 0 12px;letter-spacing:-.5px}.section-copy{font-size:14px;color:var(--muted);margin:0 0 20px;max-width:680px}
+.hero-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.hero-card{border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:12px;background:var(--paper);min-width:0;align-self:start}.hero-card:nth-child(3n+2){border-top-color:#bf7c20}.hero-card:nth-child(3n){border-top-color:#528672}.hero-card summary{list-style:none;display:flex;align-items:center;gap:12px;padding:18px 16px;cursor:pointer;min-height:80px}.hero-card summary::-webkit-details-marker,.game-card summary::-webkit-details-marker{display:none}.hero-mark{width:36px;height:42px;border-radius:5px 5px 14px 14px;display:grid;place-items:center;flex-shrink:0;background:var(--soft);color:var(--blue);font-family:"STKaiti","KaiTi",serif;font-size:24px;font-weight:700}.hero-name{font-weight:750;font-size:19px}.open-hint{margin-left:auto;font-size:11px;color:var(--muted);white-space:nowrap}.hero-card[open] .open-hint{color:var(--blue)}.hero-body{padding:0 16px 20px;overflow-wrap:anywhere}.hero-body p{margin:0 0 12px;font-size:14px}.per-game{font-size:11px;color:var(--muted)}.shared-rules{margin-top:18px;padding:16px 18px;border:1px dashed #a9bcd5;border-radius:10px;background:#eaf0f9}.shared-rules summary,.rule-detail summary{font-size:15px;font-weight:650;cursor:pointer;min-height:28px}.shared-rules ol{font-size:14px;padding-left:22px;margin:16px 0 0}.shared-rules li{padding:3px 0}.games-list{display:grid;gap:8px}.game-card{border:1px solid var(--line);background:var(--paper);border-radius:10px;overflow:hidden}.game-card summary{display:flex;align-items:center;justify-content:space-between;list-style:none;cursor:pointer;padding:16px 20px;gap:18px}.game-title{font-size:16px;font-weight:700;display:block}.game-status{font-size:11px;color:var(--muted);display:block;margin-top:3px;line-height:1.6}.plus{color:var(--blue);font-size:23px;flex-shrink:0}.game-card[open] .plus{transform:rotate(45deg)}.game-body{padding:0 20px 18px;font-size:14px;overflow-wrap:anywhere}.game-body p{margin:10px 0}.game-description{font-weight:650}.aliases{font-size:12px;color:var(--muted)}
+.score-callout{border-left:4px solid var(--orange);background:var(--paper);padding:20px 24px;margin:10px 0 16px;border-radius:0 10px 10px 0}.score-callout strong{font-size:19px}.score-callout p{font-size:14px;margin:8px 0 0;color:var(--muted)}.rule-detail{padding:17px 0;border-bottom:1px solid var(--line)}.rule-detail p{font-size:14px;color:#3f5572;margin:16px 0 0}.connection-note{padding:18px 20px;background:#e7edf6;border-radius:10px;margin-top:20px;font-size:13px;color:var(--muted)}.connection-note strong{color:var(--ink)}.connection-note p{margin:7px 0 0}.updates{padding-bottom:20px}.updates article{display:grid;grid-template-columns:120px 1fr;gap:18px;border-top:1px solid var(--line);padding-top:20px;margin-top:20px}.updates time{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}.updates h3{font-size:16px;margin:0}.updates article p{font-size:14px;color:var(--muted);margin:7px 0}footer{display:flex;justify-content:space-between;gap:12px;padding:24px 0 36px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.empty{border:1px dashed var(--line);padding:20px;color:var(--muted);font-size:14px}
+@media(max-width:700px){.hero-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{grid-template-columns:1fr;padding-top:30px;gap:14px}.intro .eyebrow{margin-bottom:0}h1{grid-row:auto}.intro-note{grid-column:1;max-width:none}.intro-copy{padding:0;font-size:14px}.hero-card summary{padding:14px 12px;gap:8px}.hero-name{font-size:18px}.open-hint{font-size:10px}.hero-mark{width:30px;height:36px;font-size:21px}.hero-body{padding:0 12px 16px}.section-nav a{padding:8px 11px;font-size:13px}.updates article{grid-template-columns:1fr;gap:5px}.masthead{padding:18px 20px}main{padding:0 20px}.content-section{padding-top:28px}.game-card summary{padding:15px 16px}.game-body{padding:0 16px 16px}}
+@media(max-width:370px){.hero-grid{grid-template-columns:1fr}.section-nav{gap:0}.section-nav a{padding:8px}.masthead{padding-inline:14px}main{padding-inline:14px}.brand span{margin-left:8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body><a class="skip" href="#main">跳到正文</a>
+<header class="masthead"><div class="brand">游戏王<span>玩家页面</span></div><a href="#updates">更新于 10 月 19 日</a></header>
+<main id="main"><section class="intro"><p class="eyebrow">现场见，一起玩。</p><h1>先看技能，<br>再选你的角色。</h1><p class="intro-copy">12 个公开角色，33 项游戏玩法。<br>规则有疑问，随时回来查。</p>
+<div class="intro-note"><span class="note-dot" aria-hidden="true"></span><p>现场自选、当场随机选，或由组织者随机分发。这里展示所有技能，分配方式由现场决定。</p></div></section>
+<nav class="section-nav" aria-label="页面导航"><a href="#heroes">角色技能</a><a href="#games">游戏规则</a><a href="#scoring">计分与胜负</a><a href="#updates">更新记录</a></nav>
+<div class="search-bar" id="guide-search-bar" hidden><label for="guide-search">查找角色或游戏</label><div class="search-field"><input type="search" id="guide-search" placeholder="如：援手、抢数字、猜数字" autocomplete="off"><button type="button" id="clear-search">清空</button></div><p id="search-status" role="status" aria-live="polite">12 个角色 · 33 项游戏</p></div>
+<section id="heroes" class="content-section"><div class="section-heading"><div><p class="eyebrow">公开技能</p><h2>你想怎么赢？</h2></div><button type="button" class="expand-button" data-expand="heroes" hidden>展开全部技能</button></div>
+<p class="section-copy">点击角色看完整技能。角色技能全场公开，与大鬼、小鬼等秘密阵营分别分配。</p><div class="hero-grid"><details class="hero-card" id="hero-time" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">时</span><span class="hero-name">时间</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>本环节你可以给自己多争取一次机会：限时环节延长时限，轮次环节多要一回合。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-swap" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">换</span><span class="hero-name">换题</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>本环节你可以换掉一项内容：换题目、换词语、或换掉自己的禁词。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-double" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">叠</span><span class="hero-name">叠浪</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>本环节你有一次得分翻倍：某一次拿到的分直接按两倍记，翻多少由现场确认。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-retry" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">回</span><span class="hero-name">回澜</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>本环节你可以把一次失败重来一次：答错、猜错、被判违规，都可以重做一回，只按后一次的结果算。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-shift" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">幻</span><span class="hero-name">幻体</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>本环节你可以把一次行动转给别人代做，成绩仍记在你名下；或把自己的扣分转给指定一人。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-aid" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">援</span><span class="hero-name">援手</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>本环节可将一名玩家的一次得分复制给自己或指定的一人，原玩家的得分保留。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-balance" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">守</span><span class="hero-name">守衡</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>定风：自己一次扣分时，可抵掉其中最多 3 分；最多抵到 0 分，不能变成加分。可防小游戏或公开技能造成的扣分。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-oracle" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">星</span><span class="hero-name">星筹</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>望星：小游戏开始前预测另一人拿第一，猜中自己加 3 分，猜错扣 1 分，并列第一也算。按原始成绩判定；持续玩法须事先固定下一轮或观察窗口，押窗口内原始得分最高者。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-steal" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">截</span><span class="hero-name">截流</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>分潮：另一人一次小游戏原始正分尚未录入时，截取其中最多 2 分转给自己，对方本次最低得 0 分。例如对方应得 5 分，截 2 分后对方加 3、自己加 2。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-pact" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">结</span><span class="hero-name">结契</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>同舟：小游戏开始前邀请另一人结契，对方同意才消耗次数；结果两人原始净分都为正分，各额外加 2 分，否则各扣 1 分。结契后不能换人；持续玩法须事先固定下一轮或观察窗口。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-gambit" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">孤</span><span class="hero-name">孤锋</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>背水：自己下一次挑战开始前发动，成功额外加 2 分，失败额外扣 2 分。事先按游戏规则确定成功标准；名次赛取前半名（人数除以二向上取整，并列按名次），无名次的得分玩法以本次原始净分为正为成功。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details>
+<details class="hero-card" id="hero-mirror" data-search-item>
+    <summary><span class="hero-mark" aria-hidden="true">照</span><span class="hero-name">照影</span><span class="open-hint">查看技能</span></summary>
+    <div class="hero-body"><p>借相：小游戏开始前先扣自己 1 分，借用一名在场玩家的公开技能一次，遵守原技能限制；不能借照影或秘密角色能力。原持有者仍能用自己的技能；选定不能更换，未触发也不退代价。</p><span class="per-game">每个游戏环节可用一次</span></div>
+  </details></div><p class="empty" id="heroes-empty" hidden>没有匹配的角色，试试技能关键词。</p>
+<details class="shared-rules"><summary>技能通用规则 · 每环节一次</summary><ol><li>每个游戏环节每人可发动自己的技能一次，下一环节恢复；现场口头发动，分数通过现有加减分入口录入。</li><li>小游戏自身产生的分数称为原始分，先确认原始结果和名次，再结算技能；预测、结契和背水均按原始结果判定。</li><li>同一笔原始得分最多由一个放大、复制或转移技能处理，按最先公开声明者优先；其他人可保留次数等下一笔。</li><li>技能产生的额外分不能再次翻倍、复制或截取，不能连续叠加刷分。原始分和技能分分别记流水。</li><li>守衡在一次扣分最终落到自己身上时发动，最多减 3 分；照影固定 1 分代价不能免除、转嫁、复制或当作挑战失败。</li><li>持续玩法须在发动前固定下一轮或观察窗口，不能事后截取时段；结契看窗口原始净分，星筹看窗口原始得分排名。</li><li>公开技能不作用于匿名投票、联络卡、手牌、秘密角色、阵营胜负或终局身份奖扣分。</li></ol></details>
+</section>
+<section id="games" class="content-section"><div class="section-heading"><div><p class="eyebrow">游戏规则</p><h2>这局玩什么？</h2></div><button type="button" class="expand-button" data-expand="games" hidden>展开全部规则</button></div><p class="section-copy">所有玩法都在这里，点击展开。“候选”和“待确认”仍是草案，开玩前一起定好人数、时限与分值。</p><div class="games-list"><details class="game-card" id="game-all-day-taboo" data-search-item>
+    <summary><span><span class="game-title">全天禁词</span><span class="game-status">现行玩法 · 开玩前统一时限、轮次与计分</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">给下一位设置禁词，说出自己的禁词时按现场约定扣分。</p><p>围成一圈，顺时针由上一位给下一位设置一个禁词，全天生效。说出自己的禁词时，由现场确认并记录扣分。</p>
+<p>当前默认每次扣 5 分；现场若调整处罚，开玩前统一说明，以当天公布的扣分规则为准。说出、误说、喊答案均要按同一口径判断。</p></div>
+  </details>
+<details class="game-card" id="game-guandan" data-search-item>
+    <summary><span><span class="game-title">掼蛋</span><span class="game-status">现行玩法 · 开玩前统一时限、轮次与计分</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">现场进行牌局，结束后在排行榜记录实际得分；需两副扑克牌。</p><p>两副扑克牌，四人上桌，对面两家一伙，按现场统一的掼蛋规则进行；原安排以先打过 A 的一方获胜。</p>
+<p>4 人局无需轮空；5 人局 1 人轮空；6 人局 2 人轮空。轮空位现场决定并轮换，原方案为输家下、轮空者上。</p>
+<p>按牌局结果排名：赢方两人并列第一，输方两人并列倒数第二，轮空者取中间名次。开玩前确认打到哪一级、局数及轮空安排。</p></div>
+  </details>
+<details class="game-card" id="game-one-stroke" data-search-item>
+    <summary><span><span class="game-title">一笔画</span><span class="game-status">现行玩法 · 开玩前统一时限、轮次与计分</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">纸笔画图让其他人猜，落笔后全程不抬笔。</p><p>使用纸笔作画，落笔后全程不抬笔；其他人猜图中内容，按现场约定轮换画者。</p>
+<p>原方案按累计猜中人数记画者原始分：1 人猜中 +3，2 人 +2，3 人 +1，4 人 +0.5；无人猜中，画者 −2。</p>
+<p>上述猜中人数表来源于五人方案；4 人或 6 人局须在开玩前确认适用档位、时限与并列规则，不补出未经确认的新档位。</p></div>
+  </details>
+<details class="game-card" id="game-telephone" data-search-item>
+    <summary><span><span class="game-title">传声筒</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">逐人传递一句话，比较首尾信息；原主线项，现保留为备用。</p><p>备用玩法：逐人传递同一句话，由最后一人说出收到的内容，比较首尾信息。</p>
+<p>本项已移出主线，旧主线时限和轮数不再作为现行规则；人数、传递方式、重复限制、轮换和计分须重新在现场确认。</p></div>
+  </details>
+<details class="game-card" id="game-balance" data-search-item>
+    <summary><span><span class="game-title">蒙眼单脚站立</span><span class="game-status">现行玩法 · 开玩前统一时限、轮次与计分</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">蒙眼或闭眼单脚站立，先确认平坦场地；也称蒙眼闭眼单脚站立。</p><p>蒙眼或闭眼单脚站立，另一只脚离地，用秒表记录坚持秒数，时间越长名次越靠前。</p>
+<p>先确认平坦、干燥、无障碍的地面，身旁安排看护，不靠近坡边或硬物；不适时立即停止。落脚、扶物等结束判定在开始前统一。</p></div>
+  </details>
+<details class="game-card" id="game-guess-person" data-search-item>
+    <summary><span><span class="game-title">问答猜人</span><span class="game-status">现行玩法 · 开玩前统一时限、轮次与计分</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">分组互问是或否的问题，猜出对方设定的人物。</p><p>分成两组：4 人为 2／2，5 人为 2／3，6 人为 3／3。分组用抓阄，双方各出一个大家知道的人名交给对方猜。</p>
+<p>轮流提出是非问题，对方只能回答“是”或“否”；先猜出对方设定人物的组获胜。过程口头进行，不需要手机题库。</p>
+<p>赢组全体并列第一，输组按原安排的输组名次处理；若与单脚站立合为一段，两项成绩先合成段内名次，再录入一次段分。</p></div>
+  </details>
+<details class="game-card" id="game-charades" data-search-item>
+    <summary><span><span class="game-title">你比划我猜</span><span class="game-status">现行玩法 · 开玩前统一时限、轮次与计分</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="aliases">别名：我猜我画（动作版）</p><p class="game-description">一人比划，其他人猜题，成绩通过原有加减分入口记录。</p><p>一人比划，其余人抢答；不许出声，只表演动作或动词，猜中的接替比划。动作本身不算说出禁词，喊出的答案仍受禁词约束。</p>
+<p>原方案：猜中 +1，30 秒无人猜中则换人、本轮 −1；按累计原始成绩排名。开始前说清超时扣分对象与轮换方式。</p></div>
+  </details>
+<details class="game-card" id="game-word-chain" data-search-item>
+    <summary><span><span class="game-title">顺藤摸瓜</span><span class="game-status">现行玩法 · 开玩前统一时限、轮次与计分</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">两人往返接有关联的人名，不能继续时按现场约定记分。</p><p>两人以 AB 往返的方式，接有关联的人名；接不上就换人。人名范围、关联是否成立和重复限制在开始前统一。</p>
+<p>原方案接上 +1、接不上 −1，按净分排名；若限时、轮数或计分调整，以当场说明为准。</p></div>
+  </details>
+<details class="game-card" id="game-two-truths" data-search-item>
+    <summary><span><span class="game-title">三真一假</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">说出三件真事和一件假事，让其他人找出假的一件。</p><p>备用玩法：每人说三件真事和一件假事，其余人找出假的一件，轮流让所有人参与。</p>
+<p>本项已移出主线。题目范围、能否追问、猜中计分和轮数须在开玩前确认，不涉及不愿公开的私事。</p></div>
+  </details>
+<details class="game-card" id="game-rps-arena" data-search-item>
+    <summary><span><span class="game-title">石头剪刀布擂台</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">轮流以石头剪刀布挑战擂主，胜负和记分开玩前确认。</p><p>备用玩法：轮流以石头剪刀布挑战擂主，依据胜负更换擂主并继续挑战。</p>
+<p>本项已移出主线。平局是否重来、上场顺序、每次挑战局数、结束条件及计分均由现场确认。</p></div>
+  </details>
+<details class="game-card" id="game-seven-clap" data-search-item>
+    <summary><span><span class="game-title">逢七拍</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="aliases">别名：数 7 拍腿</p><p class="game-description">轮流报数，遇到七或七的倍数改为拍腿；与数 7 拍腿相近。</p><p>怎么玩：五人围坐，从 1 开始轮流报数。数到 7 或者 7 的倍数，必须立刻拍腿。反应慢、忘记拍、拍错的当场出局。报到 50（或最后剩的人赢）结束。</p>
+<p>计分：最后还在的人按名次 5/4/3/2/1。出局名次按被淘汰顺序倒着给。</p>
+<p>坑：节奏要由慢到快，每人报 1–3 个，从慢开始，让人跟得上。直接快速报会乱数。</p>
+<p>禁词：只喊数字，风险低。是好东西——让鬼也有喘息机会的环节。</p></div>
+  </details>
+<details class="game-card" id="game-twenty-questions" data-search-item>
+    <summary><span><span class="game-title">二十问</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="aliases">别名：猜数字</p><p class="game-description">用是非问题缩小数字范围，再猜答案；与猜数字相近。</p><p>怎么玩：一人心里想定一个 1 到 100 的数字，不告诉任何人。其余四人轮流问是非题——&quot;大于 50 吗&quot;&quot;是偶数吗&quot;&quot;是 3 的倍数吗&quot;。每人最多 5 问，20 问内猜中算赢。猜完公布答案，换人。</p>
+<p>计分：猜中的人 +2，定数字的人 +1（他全程要装死，有补偿）。猜不出这一轮全 0 分。</p>
+<p>坑：定数字的人最容易给暗示（点头、眼神、嘴角）。开场直接说&quot;定数的不能有任何表情&quot;，被猜到表情也算犯规。</p>
+<p>禁词：只喊数字和&quot;是/否&quot;，风险低。纯逻辑，不靠嘴皮子。</p></div>
+  </details>
+<details class="game-card" id="game-opposite-command" data-search-item>
+    <summary><span><span class="game-title">口令反着做</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="aliases">别名：反着做</p><p class="game-description">指挥喊口令，其他人做相反动作；与反着做相近。</p><p>怎么玩：一人当指挥喊口令（摸鼻子 / 举手 / 跺脚 / 拍手），其余人必须做相反的动作。做对通过，做错淘汰。剩下的人里再推一个当指挥，轮着来。</p>
+<p>计分：每轮活到最后 +1，最后的擂主额外 +2。</p>
+<p>坑：指挥的要故意喊容易混的（摸左耳 / 举右手），不然规则太简单，一下就过。冷场时换人指挥，比硬撑好。</p>
+<p>禁词：只喊动作词，风险低。</p></div>
+  </details>
+<details class="game-card" id="game-ten-second-memory" data-search-item>
+    <summary><span><span class="game-title">十秒记忆</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">短暂观察一组物品，遮住后回忆内容。</p><p>怎么玩：摆 5–7 样东西（瓶盖、手机、钥匙、树叶、硬币…），看 10 秒然后全部盖住（外套、帽子都行）。轮流报自己记得的，报对一个 +1，报错一个 −1。</p>
+<p>计分：每轮按报对的个数排名，最后累计排名换 5/4/3/2/1。</p>
+<p>坑：物品必须选差异大的——全是瓶盖和全是硬币就废了。摆东西的人不能报数（&quot;1、2、3&quot;会给后面的人排好序，直接毁掉这题），随便放即可。</p>
+<p>禁词：基本不开口，风险低。</p></div>
+  </details>
+<details class="game-card" id="game-action-chain" data-search-item>
+    <summary><span><span class="game-title">动作接龙</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">重复前面玩家的动作，再增加一个新动作。</p><p>怎么玩：第一人做一个动作，第二人模仿并加一个新动作，第三人再加……到五个人就是五个动作。接不上、忘了前面某个动作、或做了重复的，淘汰。</p>
+<p>计分：每接住一轮 +1，淘汰时按剩余动作数给分。</p>
+<p>坑：动作要明显不同（不能五个都是举手）。最好限定&quot;不许出声&quot;——加上这条既降低误说禁词，也更有笑点。</p>
+<p>禁词：纯动作，零开口。适合当缓冲。</p></div>
+  </details>
+<details class="game-card" id="game-gesture-number" data-search-item>
+    <summary><span><span class="game-title">猜拳喊数</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="aliases">别名：石头剪刀布猜数字</p><p class="game-description">出拳同时喊约定数字，核对手势和数字；与石头剪刀布猜数字相近。</p><p>怎么玩：五人同时出拳并喊一个数字。喊的数和拳头对得上才算有效：剪刀喊 0、石头喊 1、布喊 2 或 5。无效的不计入。喊错的人扣一分或直接出局。</p>
+<p>计分：打满 3 轮有效回合，按有效次数排名换 5/4/3/2/1。</p>
+<p>坑：规则必须开场统一说一遍——石头喊几、布能不能喊两个，现场吵起来比玩本身还久。建议只用&quot;剪刀 0、石头 1、布 5&quot;，干净。</p>
+<p>禁词：只喊数字，风险低。和擂台赛二选一即可，别两个连着玩。</p></div>
+  </details>
+<details class="game-card" id="game-memory-pairs" data-search-item>
+    <summary><span><span class="game-title">纸牌记忆配对</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">轮流翻开两个位置，靠记忆找出相同的一组。</p><p>怎么玩：纸上画 12 个格子（3 行 4 列），填 6 组词或图案，每组两个相同。全部盖住。轮流一次掀两个：配对成功 +2 并允许再掀一次；配错 −1 盖回去。</p>
+<p>计分：全部配完结算，按净得分排名换 5/4/3/2/1。</p>
+<p>坑：掀牌前不许商量、不许指——有人一伸手别人就知道位置，这游戏就废了。写格子时字体别太大，位置留白大一点便于遮挡。</p>
+<p>禁词：安静游戏，风险低，但围观容易吵，让看的人闭嘴。</p></div>
+  </details>
+<details class="game-card" id="game-half-clue" data-search-item>
+    <summary><span><span class="game-title">半张情报</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">每人拿到部分信息，一起讨论还原完整内容。</p><p>怎么玩：出题人把一句话拆成三段写在三张纸上，分给三个人。三人只能看自己那一段，然后一起讨论把完整的那句话还原出来。凑出来的句子与原句越接近越好。</p>
+<p>计分：完全还原三人各 +2；还原对一半三人各 +1；完全不对全 0。出了题的人这轮不计分。</p>
+<p>坑：出题人必须出&quot;信息够拼出唯一答案&quot;的句子。比如&quot;中午我们吃__和__&quot;就太松，能拼出无数种；出具体的地点、时间或只有一种搭配的事才对。一共玩 3–4 轮，每轮换出题人。</p>
+<p>禁词：要讨论，中等风险。红线照旧：句子内容不许涉及在场任何人的私事，也不许涉及角色和卡。</p></div>
+  </details>
+<details class="game-card" id="game-silent-action" data-search-item>
+    <summary><span><span class="game-title">默契猜动作</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">观看动作并同时判断答案，避免跟随别人作答。</p><p>怎么玩：一人做一个动作（比如假装钓鱼 / 挤牙膏 / 打篮球），另外四人同时用手比划指认，不许说话。指对做的人 +2、猜的人各 +1，指错 −1。</p>
+<p>计分：每轮结算，五轮累计排名换 5/4/3/2/1。</p>
+<p>坑：四个人同时指会出现&quot;跟风&quot;——有人第一个指了，其余三个跟着指，看起来像全对其实没判断。所以要等所有人指完再看，不许一个指了立刻生效。</p>
+<p>禁词：指认过程不能说话，喊答案才算开口。这条正好制造&quot;什么时候能开口&quot;的紧张感，是它的额外价值。</p></div>
+  </details>
+<details class="game-card" id="game-card-parity" data-search-item>
+    <summary><span><span class="game-title">扑克猜单双</span><span class="game-status">备用玩法草案 · 原文人数与分值按现场约定确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">抽牌前猜单或双，再翻牌核对；可共用掼蛋的牌。</p><p>怎么玩：掼蛋的牌洗好背面朝上摊开。轮流随手抽一张猜——单 / 双、或者红 / 黑 / 大 / 小。猜对 +1，猜错 −1。抽走的牌不洗回，五轮后重新洗牌。</p>
+<p>计分：五轮累计净分排名换 5/4/3/2/1。</p>
+<p>坑：这是纯运气游戏——赢的人可能什么都没做对。别把它放在需要&quot;表现&quot;的位置，当调剂或体力不支时的替补最合适。不许数牌，数了就变成技术活了。</p>
+<p>禁词：只喊牌，风险低。它和掼蛋共用同一副牌，不额外要道具。</p></div>
+  </details>
+<details class="game-card" id="game-number-rush" data-search-item>
+    <summary><span><span class="game-title">抢数字</span><span class="game-status">玩法已确认 · 报数范围、轮数及扣分值待现场确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">每人取名后抢报数字，撞号时叫出对方的名字，叫不出的人扣分。</p><p>每人取一个名字，开始后依次抢报数字；两人或以上同时报出同一个数字时，要叫出对方的名字，叫不出的人扣分。</p>
+<p>报数范围、每轮结束方式和扣分数值均需现场确认；不默认淘汰、不默认“名字等于一条命”，也不另设必须齐喊的规则。</p></div>
+  </details>
+<details class="game-card" id="game-idiom-grid" data-search-item>
+    <summary><span><span class="game-title">四宫格成语</span><span class="game-status">已提玩法 · 细则待确认，尚未排期</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">把四字成语分成四格画，其他人猜；猜中人数影响得分，具体分值待定。</p><p>你定的规则（原话，不改）：① 画四字成语，分开画四宫格（2×2，四格各一个字）；② 别人来猜；③ 猜到的人数决定得分——1 人猜到分最多，2 人次之，3 人再少，4 人最少；④ 一个都没猜到 → 画的人扣分。</p>
+<p>轮次（本轮替你定）：5 轮，五人轮流画，每人当一次画的人。一格 30 秒，四格 2 分钟**，加猜和计分，一轮约 3–4 分钟，全程 15–20 分钟。时间紧就改成 3 轮（12 分钟）。</p>
+<p>⚠️ 坑一：成语会撞禁词（最要命）。猜的人要喊出完整成语，如果某个字正好是某人手里的禁词，说话的人白扣分。→ 开场把五个禁词念出来，画的人选成语时避开。</p>
+<p>⚠️ 坑二：出冷门成语等于没人猜。四字成语冷门的比例很高，出个&quot;一蹴而就&quot;全场猜不到，画的人白扣分。→ 只用最简单的大众成语：一心一意、画蛇添足、守株待兔、井底之蛙、狐假虎威、掩耳盗铃、拔苗助长、亡羊补牢。</p>
+<p>⚠️ 坑三：四格一起露，还是一格一格露？建议四格一起露。成语要靠整体猜；逐格露会把猜谜变成填空，难度掉一半。</p>
+<p>得分（本轮设计）：1 人猜到 +3 ｜ 2 人各 +2 ｜ 3 人各 +1 ｜ 4 人（全员）各 +0.5 ｜ 没人猜到：画的人 −2。<br>逻辑是&quot;猜的人越少 = 画得越难 = 猜中那人越厉害&quot;，所以人越多、每人分越低——和常规&quot;猜中就多加分&quot;正好相反。全员猜到时人人只拿 0.5，画的人不吃亏。<br>有人猜到时画的人 0 分（不奖不罚），只有全军覆没才罚。</p>
+<p>猜的方式：举手抢答。答案公布后，答对的人统一举手，全场数一遍有几个人举手——这样才能统计&quot;猜到的人数&quot;。逐个轮流猜会让先猜的人占便宜。</p>
+<p>你原话里的一句我有疑问：&quot;一个人都猜不到就是画的人扣分，猜到的人也会加&quot;。既然一个人都没猜到，那就没有&quot;猜到的人&quot;可以加。本轮按没人猜到时猜的人不加不扣、只罚画的人处理——否则会变成&quot;画得越烂，全场都加分&quot;。如果你原意是猜的人也要拿安慰分，说一声我改。</p>
+<p>技能落点：暂无，和其他新游戏一样等你挑完统一补。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-undercover" data-search-item>
+    <summary><span><span class="game-title">谁是卧底（词）</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">描述各自拿到的词，找出不同词的玩家；与真正阵营认定分开。</p><p>怎么玩：写 5 张词牌，4 张同一个词、1 张相近但不同的词。每人看自己那张，一轮轮流用一个词描述，描述里不能出现词里的字。一轮结束投票投最像卧底的人。</p>
+<p>计分：投中卧底投的人 +2；卧底没被投中 +2；其余 0。玩 3 轮，每轮重新发牌。</p>
+<p>坑：这是全天最贴近&quot;谁是鬼&quot;的游戏，但不能当验人用——它只是好玩，票型跟真投票卡无关，别让人混淆。词牌要提前写好（5 张 / 3 轮 = 15 张），今晚准备最省事。</p>
+<p>⚠️ 红线：不许借&quot;卧底&quot;这个词影射真实角色（&quot;你才是卧底&quot;&quot;我怀疑你是鬼&quot;）。这条比游戏本身重要，会毁掉整个暗线。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-photo-idiom" data-search-item>
+    <summary><span><span class="game-title">看图猜成语</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">看手机照片猜成语等答案，使用照片前先征得主人同意。</p><p>怎么玩：一人当&quot;发图人&quot;，从自己手机相册里随手挑一张照给别人看（不许提前挑好藏起来），其余人猜这是什么成语/俗语/歌名，限时 30 秒。</p>
+<p>计分：猜中 +1，超时 −1。发图人每轮换人。</p>
+<p>坑：发图人很容易挑太有暗示的图（比如直接拍了&quot;一只手&quot;）——要宣布&quot;不许挑图，只许随手划到哪张算哪张&quot;。冷门歌名和冷僻成语一律不算。</p>
+<p>⚠️ 注意：这是唯一一个会暴露相册隐私的游戏（会看到别人的照片）。必须开场取得同意，并且只看不点名、不评价谁拍的。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-silent-relay" data-search-item>
+    <summary><span><span class="game-title">无声传口令</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">只用动作逐人传递口令；是与传声筒相近的无声变体。</p><p>怎么玩：指挥想一个动作口令（拍手两下、摸头、指鼻子），只能用动作传达，不许说话。一个人传一个，传到最后一个人做出来。做错了要传下去才知道，全员都做错。</p>
+<p>计分：一次就传对 +2；两轮内纠正过来 +1；三次还错 −1。</p>
+<p>坑：这是&quot;信息传递会失真&quot;类玩法——传声筒已按 R48 移出主线，若想补一个传话类游戏，这一项和传声筒二选一。本项靠动作而非语言，禁词风险更低。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-reverse" data-search-item>
+    <summary><span><span class="game-title">反向复述</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">把听到的一句话倒着复述，再传给下一位。</p><p>怎么玩：A 说一句日常话（&quot;我昨天买了个杯子&quot;），B 必须倒着复述（&quot;子杯个买了天昨我&quot;）。然后 C 接 B 的继续倒着说，接不上淘汰。</p>
+<p>计分：接上一轮 +1，淘汰时按存活轮数给分。</p>
+<p>坑：不许说出禁词——倒着复述时禁词照样触发，而且更隐蔽（&quot;天昨&quot;里可能有你的词）。开场必须说这一条。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-chairs" data-search-item>
+    <summary><span><span class="game-title">抢椅子</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">口令停止后抢位置，需要合适座位和平坦空间。</p><p>怎么玩：椅子（或挑几块石头当座位）比人少一个。放一段音乐或有人喊&quot;停&quot;，所有人立刻去抢位置。抢不到位置的出局，剩下的人撤掉一个位置继续。</p>
+<p>计分：最后留到最后的名次给 5/4/3/2/1。</p>
+<p>坑：必须用营地现成的东西（折叠椅、石头、书包），别指望有正经椅子。草地跑动有摔倒风险，地面不平就改成站着原地不动。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-trust" data-search-item>
+    <summary><span><span class="game-title">信任之桥</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">一人蒙眼或闭眼，另一人口头引导，场地条件先确认。</p><p>怎么玩：一人蒙眼或闭眼，另一个人只能用嘴引导（&quot;往前走&quot;&quot;左边一点&quot;），不许碰他。两人一组过一段路，看谁配合得准。</p>
+<p>计分：五组轮完，按到达时间排名换 5/4/3/2/1。</p>
+<p>坑：这是 15 个里风险最高的——蒙眼走障碍会摔。它和你已有的&quot;蒙眼单脚站立&quot;是同一类风险游戏，两个最多选一个，而且只在平地、空旷处玩。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-linked-legs" data-search-item>
+    <summary><span><span class="game-title">五人六足</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">绑腿同步行走的协作候选，适用人数、绑法和场地待确认。</p><p>怎么玩：相邻两人把相邻的内侧腿用布条绑在一起，两人一组同步走直线，比谁不摔倒、不偏离。</p>
+<p>计分：走完一段距离不出界、不摔倒的组各 +2；中途散的 +0；摔倒的 −1。</p>
+<p>坑：这是 15 个里最容易摔的——绑腿走路必然歪。只走草地、距离不超过 10 米，有人穿拖鞋或平衡差就别上。另外它要一条布条（遮眼布可以复用，但那就和单脚站立冲突了）。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-unique" data-search-item>
+    <summary><span><span class="game-title">找出唯一的人</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">轮流说无关隐私的小细节，让每个人参与表达。</p><p>怎么玩：每人说一件只有自己知道、别人猜不到的事（&quot;我鞋带是昨天断的&quot;&quot;我手机密码里有 7&quot;）。说不出来的人本轮记一次可疑，说完五轮后数谁被记最多。</p>
+<p>计分：不计分，纯信息。只做一件事：让每个人都说点什么，防止有人全程沉默。</p>
+<p>坑：这个游戏会逼人说真话，说的是&quot;只有自己知道&quot;的私人细节——容易滑向隐私。必须限定在无所谓的细节（吃的、穿的、设备），明确禁止感情、财务、健康、家庭。</p>
+<p>⚠️ 风险提示：它和已有的问答猜人机制重叠（都靠问问题收窄范围），两个挑一个就够。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-thirty" data-search-item>
+    <summary><span><span class="game-title">数到 30</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">按约定抢着报数到三十，轮次和记分仍待选择。</p><p>怎么玩：从 1 开始轮流抢着数下一个数，一直数到 30。只能报&quot;上一个数 +1&quot;或&quot;+2&quot;，两个都允许；犹豫超过 3 秒算跳过，跳过的人出局。</p>
+<p>计分：撑到最后的 +3，第二个撑到的 +2，依此类推。</p>
+<p>坑：节奏越来越快是全部乐趣所在，前面要故意慢、留到最后 10 个数再加速。太早喊快就没意思了。</p></div>
+  </details>
+<details class="game-card" id="game-candidate-word-chain" data-search-item>
+    <summary><span><span class="game-title">词语接龙</span><span class="game-status">候选草案 · 尚未选定，玩法和分值须开玩前确认</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">用上一个词的尾字接下一个词；与顺藤摸瓜相近但关联方式不同。</p><p>怎么玩：第一个人说一个词，第二个人必须用上一个词的最后一个字开头，往下接。接不上的人出局。</p>
+<p>计分：接上一个 +1，淘汰时按接了几轮给分。</p>
+<p>坑：和你已有的&quot;顺藤摸瓜&quot;高度重复——都是接词、都是开口、都会误说禁词。不建议再挑一个接词类，除非顺藤摸瓜被砍。</p></div>
+  </details>
+<details class="game-card" id="game-no-laugh" data-search-item>
+    <summary><span><span class="game-title">不要笑挑战</span><span class="game-status">已提玩法 · 细则待确认，尚未排期</span></span><span class="plus" aria-hidden="true">＋</span></summary>
+    <div class="game-body"><p class="game-description">轮流逗笑与忍笑，观察谁先笑场；轮数、笑场判定和计分待确认。</p><p>已收录，待排期。本项只加入游戏库，玩法细则尚未定稿。</p>
+<p>建议玩法：现场轮流担任逗笑者和忍笑者，逗笑者用表情、动作或笑话逗笑，忍笑者努力保持表情；每轮结束后轮换角色，让参与者都获得尝试机会。</p>
+<p>开玩前待确认：参与方式与人数、每轮时限、总轮数、笑场判定（微笑是否算、是否必须笑出声）、胜负与并列处理、计分方式及分值，均待确认；这里不预设扣分或奖励。</p></div>
+  </details></div><p class="empty" id="games-empty" hidden>没有匹配的游戏，清空搜索可查看完整清单。</p></section>
+<section id="scoring" class="content-section"><div class="section-heading"><div><p class="eyebrow">计分与胜负</p><h2>分数怎么算？</h2></div></div>
+<div class="score-callout"><strong>五段实际积分直接相加</strong><p>总分 = 五段实际分之和 + 终局身份认定结算。阶段不乘倍数；段内归档清零不丢失累计分。</p></div>
+<details class="rule-detail"><summary>段内排名、并列与扣分</summary><p>原方案每段先排名再记分：第一名拿本局人数 N 分，之后每名减 1，最后一名 1 分。两人并列第一时各拿第一名分数，下一人记第三名。第三段若包含两项，先合成段内名次，再录入一次段分。</p><p>禁词等零散扣分和技能额外分，按现场确认的实际数值分别记录原因，不再套阶段倍数。每次验人投票完成后，本段分数归档并清零；下一段从 0 开始。</p></details>
+<details class="rule-detail"><summary>人数、阵营与投票卡</summary><p>4 人：大鬼 1、小鬼 1、特殊好人 1、普通好人 1。5 人：大鬼 1、小鬼 1、特殊好人 1、普通好人 2。6 人：大鬼 1、小鬼 2、特殊好人 1、普通好人 2，即三坏三好。</p><p>默认五张普通投票卡。每名小鬼和特殊好人：同意 2、反对 2、无用 1；普通好人：同意 3、无用 1、抵消 1，没有反对票。小鬼与特殊好人各额外一张同名“联络”卡，不计入普通五张。</p><p>大鬼只有无限同意／反对，每次仍只投一张，不能出无用、抵消或联络。对外张数统一从五张按参与次数递减，不据此暴露秘密角色。</p><p>全场五次验人，每次选 2 人到全员参加，只公布汇总。抵消作废一票反对，最低减到 0；无用不影响结果。五次均完成后进入终局。</p></details>
+<details class="rule-detail"><summary>终局指认与游戏王</summary><p>每人分别指认大鬼、小鬼、特殊好人，各选一人，可以选自己。六人局认出任意一位小鬼即算小鬼这一项正确。认对一个 +5；大鬼每被一人认出 −4，小鬼只对被选中且认对的那位每次扣 4，特殊好人被认出不扣分。</p><p>四、五、六人局均以至少三人认出大鬼判好人阵营胜，否则坏人阵营胜。所有人完成指认后揭晓秘密角色；游戏王由胜方中总分最高者产生。</p></details>
+<aside class="connection-note"><strong>尚未连接现场积分</strong><p>本页当前用于查规则和技能。实时排名、个人状态与扣分流水需接入同一场对局后展示；现在的页面没有读取或上传任何人的对局数据。</p></aside></section>
+<section id="updates" class="content-section updates"><p class="eyebrow">更新记录</p><h2>规则以这里为准。</h2><article><time datetime="2026-10-19">2026.10.19</time><div><h3>新增玩家页面</h3><p>集合全部十二个公开角色、游戏规则和现行计分说明。角色可现场自选或随机分发，网页暂不记录分配。</p><p>六人局一大鬼、两小鬼；默认五张投票卡；总分直接累加。援手复制一次得分，原玩家不扣分；禁词当前默认每次扣 5 分。</p></div></article></section>
+<footer><span>游戏王 · 一起玩，随时查</span><a href="#main">回到顶部 ↑</a></footer></main>
+<script>(() => {
+'use strict';
+const m0 = (() => {
+function mountPlayerGuide(doc) {
+  const input = doc.getElementById('guide-search');
+  const bar = doc.getElementById('guide-search-bar');
+  if (!input || !bar) return;
+  const sections = ['heroes', 'games'].map(id => ({
+    id,
+    items: [...doc.getElementById(id).querySelectorAll('[data-search-item]')],
+    empty: doc.getElementById(`${id}-empty`),
+  }));
+  const updateButtons = () => {
+    for (const button of doc.querySelectorAll('[data-expand]')) {
+      const section = sections.find(value => value.id === button.dataset.expand);
+      const visible = section.items.filter(item => !item.hidden);
+      button.disabled = visible.length === 0;
+      button.textContent = visible.length && visible.every(item => item.open) ? '收起全部'
+        : section.id === 'heroes' ? '展开全部技能' : '展开全部规则';
+    }
+  };
+  const update = () => {
+    const query = input.value.trim().toLocaleLowerCase('zh-CN');
+    const counts = sections.map(section => {
+      let count = 0;
+      for (const item of section.items) {
+        item.hidden = query !== '' && !item.textContent.toLocaleLowerCase('zh-CN').includes(query);
+        if (!item.hidden) {
+          count++;
+          if (query) item.open = true;
+        }
+      }
+      section.empty.hidden = count !== 0;
+      return count;
+    });
+    doc.getElementById('search-status').textContent = `${counts[0]} 个角色 · ${counts[1]} 项游戏${query ? '匹配' : ''}`;
+    updateButtons();
+  };
+  input.addEventListener('input', update);
+  doc.getElementById('clear-search').addEventListener('click', () => {
+    input.value = '';
+    update();
+    input.focus();
+  });
+  for (const button of doc.querySelectorAll('[data-expand]')) {
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      const section = sections.find(value => value.id === button.dataset.expand);
+      const visible = section.items.filter(item => !item.hidden);
+      const open = visible.some(item => !item.open);
+      for (const item of visible) item.open = open;
+      updateButtons();
+    });
+  }
+  for (const section of sections) {
+    for (const item of section.items) item.addEventListener('toggle', updateButtons);
+  }
+  const revealHash = () => {
+    let id;
+    try { id = decodeURIComponent(doc.defaultView.location.hash.slice(1)); } catch { return; }
+    const target = doc.getElementById(id);
+    if (target?.matches('[data-search-item]')) {
+      input.value = '';
+      update();
+      target.open = true;
+      target.scrollIntoView({ block: 'start' });
+    }
+  };
+  doc.defaultView.addEventListener('hashchange', revealHash);
+  bar.hidden = false;
+  revealHash();
+}
+if (typeof document !== 'undefined') mountPlayerGuide(document);
+
+return { mountPlayerGuide };
+})();
+})();</script></body></html>
